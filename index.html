@@ -6,243 +6,92 @@
     <title>Gerador de Crachá - Seminário Linux Embarcado 2025 - Online</title>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body {
             background: linear-gradient(135deg, #1a2a3a 0%, #0d1721 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            color: #fff;
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            padding: 20px; color: #fff;
         }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-        
-        h1 {
-            color: #4CAF50;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-        }
-        
-        .subtitle {
-            color: #ccc;
-            font-size: 1.2rem;
-        }
-        
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-        }
-        
+        header { text-align: center; margin-bottom: 30px; width: 100%; }
+        h1 { color: #4CAF50; margin-bottom: 10px; font-size: 2.2rem; text-shadow: 0 0 10px rgba(76, 175, 80, 0.5); }
+        .subtitle { color: #ccc; font-size: 1.1rem; }
+
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1200px; width: 100%; }
         .form-container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 400px;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); width: 100%; max-width: 400px; backdrop-filter: blur(10px);
         }
-        
-        .form-title {
-            color: #4CAF50;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.8rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-            font-weight: 500;
-        }
-        
+        .form-title { color: #4CAF50; margin-bottom: 20px; text-align: center; font-size: 1.6rem; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #ccc; font-weight: 500; }
         input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #444;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            background: rgba(255, 255, 255, 0.9);
+            width: 100%; padding: 12px 15px; border: 2px solid #444; border-radius: 8px; font-size: 16px;
+            transition: border-color 0.3s; background: rgba(255, 255, 255, 0.9);
         }
-        
-        input:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        
+        input:focus { border-color: #4CAF50; outline: none; }
         button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 600;
-            transition: background 0.3s;
-            margin-top: 10px;
+            background: #4CAF50; color: white; border: none; padding: 14px 20px; border-radius: 8px; font-size: 16px;
+            cursor: pointer; width: 100%; font-weight: 600; transition: background 0.3s; margin-top: 10px;
         }
-        
-        button:hover {
-            background: #3d8b40;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .badge-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
-        }
-        
+        button:hover { background: #3d8b40; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+
+        .badge-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; }
         .badge-preview {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            overflow: hidden;
+            width: 100%; text-align: center; margin-bottom: 20px; border-radius: 15px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        
         .badge {
             width: 100%;
-            height: 550px;
-            color: white;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            background-size: cover;
-            background-position: center;
+            padding-bottom: 140%; /* mantém proporção do crachá */
+            color: white; position: relative;
+            background-size: contain; background-position: center; background-repeat: no-repeat;
         }
-        
         .badge-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: center;
         }
-        
-        /* Posições fixas para o nome e empresa - ajuste conforme necessário */
-        .badge-name {
-            position: absolute;
-            font-size: 26px;
-            font-weight: bold;
-            color: #000; /* Cor preta para contraste com o fundo branco */
-            text-align: center;
-            width: 100%;
-            top: 60%; /* Ajuste esta porcentagem para posicionar o nome */
-            left: 0;
-            text-transform: uppercase;
-        }
-        
+
+        /* POSIÇÕES FIXAS EM % (iguais p/ desktop e mobile) */
+        .badge-name,
         .badge-company {
-            position: absolute;
-            font-size: 20px;
-            color: #000; /* Cor preta para contraste com o fundo branco */
-            text-align: center;
-            width: 100%;
-            top: 68%; /* Ajuste esta porcentagem para posicionar a empresa */
-            left: 0;
-            font-weight: 500;
+            position: absolute; width: 80%; left: 10%;
+            text-align: center; color: #000; text-transform: uppercase; line-height: 1.2;
         }
-        
-        .download-btn {
-            background: #FFC107;
-            color: #333;
-            margin-top: 15px;
-        }
-        
-        .download-btn:hover {
-            background: #e6ac0c;
-        }
-        
+        .badge-name { top: 60%; font-weight: 700; }
+        .badge-company { top: 70%; font-weight: 600; }
+
+        .download-btn { background: #FFC107; color: #333; margin-top: 15px; }
+        .download-btn:hover { background: #e6ac0c; }
+
         .instructions {
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            width: 100%;
-            backdrop-filter: blur(10px);
+            margin-top: 30px; background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); max-width: 800px; width: 100%; backdrop-filter: blur(10px);
         }
-        
-        .instructions h2 {
-            color: #4CAF50;
-            margin-bottom: 15px;
-            text-align: center;
+        .instructions h2 { color: #4CAF50; margin-bottom: 15px; text-align: center; font-size: 1.5rem; }
+        .instructions ol { padding-left: 20px; color: #ccc; }
+        .instructions li { margin-bottom: 10px; line-height: 1.5; }
+
+        /* Ajustes leves de tipografia fora do crachá */
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
         }
-        
-        .instructions ol {
-            padding-left: 20px;
-            color: #ccc;
-        }
-        
-        .instructions li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        .image-note {
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            text-align: center;
-            font-size: 14px;
-            color: #FFC107;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .form-container, .badge-container {
-                max-width: 100%;
-            }
-            
-            .badge {
-                height: 500px;
-            }
+        @media (max-width: 480px) {
+            body { padding: 15px; }
+            header { margin-bottom: 20px; }
+            h1 { font-size: 1.8rem; }
+            .container { gap: 20px; }
+            .form-container { padding: 20px; }
+            .instructions { padding: 15px; }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Gerador de Crachá</h1>
-        <p class="subtitle">Seminário Linux Embarcado 2025 -Online - 30 de Agosto</p>
+        <p class="subtitle">Seminário Linux Embarcado 2025 - Online - 30 de Agosto</p>
     </header>
-    
+
     <div class="container">
         <div class="form-container">
             <h2 class="form-title">Preencha seus dados</h2>
@@ -262,7 +111,7 @@
                 <button type="button" id="generateBtn">Gerar Crachá</button>
             </form>
         </div>
-        
+
         <div class="badge-container">
             <h2 class="form-title">Visualização do Crachá</h2>
             <div class="badge-preview">
@@ -276,13 +125,14 @@
             <button class="download-btn" id="downloadBtn" disabled>Baixar Crachá (PNG)</button>
         </div>
     </div>
-    
+
     <div class="instructions">
         <h2>Como usar</h2>
         <ol>
             <li>Preencha o formulário com seu nome, sobrenome e empresa</li>
             <li>Clique em "Baixar Crachá" para salvar a imagem PNG</li>
         </ol>
+        <p><strong>Dica:</strong> Para melhor resultado no smartphone, use o modo paisagem (horizontal) ao baixar o crachá.</p>
     </div>
 
     <script>
@@ -295,91 +145,117 @@
             const previewName = document.getElementById('previewName');
             const previewCompany = document.getElementById('previewCompany');
             const badgeElement = document.getElementById('badge');
-            
-            // Carregar a imagem local
+
+            // Define fontes proporcionais à largura do crachá
+            function setTextScale(targetWidthPx = null) {
+                // Usa largura atual do crachá na tela, ou uma largura alvo (ex.: 800px na exportação)
+                const w = targetWidthPx ? targetWidthPx : badgeElement.getBoundingClientRect().width;
+
+                // Ajustes finos: 6.5% da largura p/ nome, 5% p/ empresa
+                const namePx = w * 0.065;
+                const companyPx = w * 0.050;
+
+                previewName.style.fontSize = namePx + 'px';
+                previewCompany.style.fontSize = companyPx + 'px';
+
+                // (opcional) ajustar letter-spacing levemente em larguras maiores
+                previewName.style.letterSpacing = (w > 500 ? '0.5px' : '0px');
+                previewCompany.style.letterSpacing = (w > 500 ? '0.3px' : '0px');
+            }
+
+            // Carregar a imagem local e ajustar proporção
             function loadLocalImage() {
-                // Tenta carregar a imagem da mesma pasta
                 badgeElement.style.backgroundImage = "url('Crachá.png')";
-                
-                // Verifica se a imagem foi carregada corretamente
                 const img = new Image();
                 img.onload = function() {
-                    console.log("Imagem carregada com sucesso");
+                    const aspectRatio = (img.height / img.width) * 100;
+                    badgeElement.style.paddingBottom = aspectRatio + '%';
+                    setTextScale(); // garante escala após conhecer a proporção
                 };
                 img.onerror = function() {
                     alert("Erro: Não foi possível carregar a imagem 'Crachá.png'. Verifique se o arquivo está na mesma pasta que este HTML.");
                     badgeElement.style.backgroundImage = "none";
                     badgeElement.style.backgroundColor = "#0d1721";
+                    setTextScale();
                 };
                 img.src = 'Crachá.png';
             }
-            
-            // Função para atualizar a visualização do crachá
+
+            // Atualiza visualização dos textos
             function updateBadgePreview() {
                 const firstName = firstNameInput.value.trim();
                 const lastName = lastNameInput.value.trim();
                 const company = companyInput.value.trim();
-                
-                if (firstName && lastName) {
-                    previewName.textContent = `${firstName} ${lastName}`;
-                } else {
-                    previewName.textContent = 'Nome Completo';
-                }
-                
-                if (company) {
-                    previewCompany.textContent = company;
-                } else {
-                    previewCompany.textContent = 'Empresa';
-                }
-                
-                // Habilitar o botão de download se todos os campos estiverem preenchidos
-                if (firstName && lastName && company) {
-                    downloadBtn.disabled = false;
-                } else {
-                    downloadBtn.disabled = true;
-                }
+
+                previewName.textContent = (firstName && lastName) ? `${firstName} ${lastName}` : 'Nome Completo';
+                previewCompany.textContent = company || 'Empresa';
+
+                // Habilita download quando tudo preenchido
+                downloadBtn.disabled = !(firstName && lastName && company);
+
+                // Recalcula escala (útil se o conteúdo mudar muito de largura)
+                setTextScale();
             }
-            
-            // Atualizar o crachá quando o botão for clicado
-            generateBtn.addEventListener('click', updateBadgePreview);
-            
-            // Atualizar o crachá em tempo real enquanto digita
-            firstNameInput.addEventListener('input', updateBadgePreview);
-            lastNameInput.addEventListener('input', updateBadgePreview);
-            companyInput.addEventListener('input', updateBadgePreview);
-            
-            // Função para baixar o crachá como PNG
-            downloadBtn.addEventListener('click', function() {
-                // Mostrar mensagem de processamento
+
+            // Baixar o crachá como PNG
+            function downloadBadge() {
                 downloadBtn.textContent = "Processando...";
                 downloadBtn.disabled = true;
-                
+
+                const originalWidth = badgeElement.style.width;
+                const originalHeight = badgeElement.style.height;
+
+                // Render em 800px de largura para ótima qualidade
+                const exportWidth = 800;
+                badgeElement.style.width = exportWidth + 'px';
+                badgeElement.style.height = 'auto';
+
+                // Ajusta fonte para a largura de exportação (consistência no PNG)
+                setTextScale(exportWidth);
+
                 html2canvas(badgeElement, {
-                    scale: 3, // Maior qualidade
+                    scale: 2,
                     logging: false,
                     useCORS: true,
-                    backgroundColor: null
+                    backgroundColor: null,
+                    width: exportWidth,
+                    height: badgeElement.offsetHeight * (exportWidth / badgeElement.offsetWidth)
                 }).then(function(canvas) {
-                    // Criar um link para download
+                    // Restaura dimensões e recalcula fonte para a tela
+                    badgeElement.style.width = originalWidth;
+                    badgeElement.style.height = originalHeight;
+                    setTextScale();
+
                     const link = document.createElement('a');
                     link.download = 'cracha-seminario-linux.png';
                     link.href = canvas.toDataURL('image/png');
+                    document.body.appendChild(link);
                     link.click();
-                    
-                    // Restaurar o botão de download
+                    document.body.removeChild(link);
+
                     downloadBtn.textContent = "Baixar Crachá (PNG)";
                     downloadBtn.disabled = false;
                 }).catch(function(error) {
                     console.error('Erro ao gerar imagem:', error);
                     alert('Ocorreu um erro ao gerar a imagem. Tente novamente.');
+                    badgeElement.style.width = originalWidth;
+                    badgeElement.style.height = originalHeight;
+                    setTextScale();
                     downloadBtn.textContent = "Baixar Crachá (PNG)";
                     downloadBtn.disabled = false;
                 });
-            });
-            
-            // Carregar a imagem ao iniciar
-            loadLocalImage();            
-            // Inicializar a visualização
+            }
+
+            // Eventos
+            generateBtn.addEventListener('click', updateBadgePreview);
+            downloadBtn.addEventListener('click', downloadBadge);
+            firstNameInput.addEventListener('input', updateBadgePreview);
+            lastNameInput.addEventListener('input', updateBadgePreview);
+            companyInput.addEventListener('input', updateBadgePreview);
+            window.addEventListener('resize', () => setTextScale());
+
+            // Inicialização
+            loadLocalImage();
             updateBadgePreview();
         });
     </script>
